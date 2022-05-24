@@ -18,6 +18,7 @@ public class CSD_LibraryManagementSystem {
         // TODO code application logic here
         System.out.println("Done");
         System.out.println("from MAC");
+        System.out.println("from win");
     }
     
 }
