@@ -43,7 +43,7 @@ public class ReaderManager {
     }
 //in ra thong tin cua node
     void visit(ReaderNode p) {
-        System.out.println(p.info);
+        System.out.println("R0"+p.info);
 
     }
 //in ra toan bo node
@@ -197,7 +197,7 @@ public class ReaderManager {
     }
     
     
-    String filename = "file/reader.txt";
+    String filename = "C://Users//Admin//Documents//GitHub//CSD_LibraryManagamentSystem//src//file/reader.txt";
 //in file
     void savefile(String filename) {
         try(FileWriter fw = new FileWriter(filename); PrintWriter pw = new PrintWriter(fw)){
@@ -237,6 +237,69 @@ public class ReaderManager {
             Logger.getLogger(ReaderManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    void f2(){
+        Reader reader = getReader();
+        if(SearchNodeByCode(String.valueOf(reader.getrCode() ) )== null){
+            addLast(reader);
+            System.out.println("Success");
+            return;            
+        }
+        System.out.println("existed");
+        
+        
+    }
+    void f3(){
+        if(isEmpty()){
+            System.out.println("Data is Empty");
+            return;
+        }
+        traverse();
+    }
+   void f4() throws IOException{
+       if(isEmpty()){
+           System.out.println("Data is Empty");
+           return;
+       }
+       String filename = validate.getString("File name :", "File name format Error", "[a-zA-Z0-9]+");
+       savefile("file/" + filename + ".txt") ;
+       System.out.println("SAVED");
+       
+   }
+   void f5(){
+       if(isEmpty()){
+           System.out.println("Data is Empty");
+           return;
+       }
+       System.out.println("rCode : ");
+       String rcode = sc.nextLine();
+      if(SearchNodeByCode(rcode) != null){
+          SearchNodeByCode(rcode);
+          return;
+      }
+       System.out.println("Book not found");
+   }
+   void f6(){
+       if ( isEmpty()){
+           System.out.println("Data is Empty");
+          return;
+       }
+       System.out.println("rCode : ");
+       String rcode = sc.nextLine();
+       if(SearchNodeByCode(rcode) != null){
+           deleteByCode(rcode);
+           traverse();
+           return;
+       }
+       System.out.println("Book not found ");
+      
+   }
+    public static void main(String[] args) {
+        ReaderManager r = new ReaderManager();
+        r.f1();
+        r.traverse();
+//        r.f5();
+//        r.f6();
+        
+    }
     
 }
