@@ -28,7 +28,7 @@ public class Validation {
         }
     }
 
-    int getDouble(String msg, String err) {
+    public int getDouble(String msg, String err) {
         while (true) {
             try {
                 System.out.println(msg);
@@ -43,7 +43,7 @@ public class Validation {
         }
     }
 
-    int getInt_2(String msg, String err) {
+    public int getInt_2(String msg, String err) {
         while (true) {
             try {
                 System.out.println(msg);

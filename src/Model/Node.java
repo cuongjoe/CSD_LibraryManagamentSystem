@@ -10,8 +10,8 @@ package Model;
  * @author Admin
  */
 public class Node {
-    Node next;
-    Book info;
+    public Node next;
+    public Book info;
     
     public Node(){
         

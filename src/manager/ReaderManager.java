@@ -197,7 +197,8 @@ public class ReaderManager {
     }
     
     
-    String filename = "C://Users//Admin//Documents//GitHub//CSD_LibraryManagamentSystem//src//file/reader.txt";
+//    String filename = "C://Users//Admin//Documents//GitHub//CSD_LibraryManagamentSystem//src//file/reader.txt";
+    String filename = "C://Users//admin//Documents//JAVA-core project//CSD_LibraryManagamentSystem//src//file/reader.txt";
 //in file
     void savefile(String filename) {
         try(FileWriter fw = new FileWriter(filename); PrintWriter pw = new PrintWriter(fw)){
