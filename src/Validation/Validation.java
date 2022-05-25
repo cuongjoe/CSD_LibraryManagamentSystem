@@ -15,7 +15,7 @@ public class Validation {
 
     Scanner sc = new Scanner(System.in);
 
-    String getString(String msg, String err, String regex) {
+    public String getString(String msg, String err, String regex) {
         while (true) {
 
             System.out.println(msg);
@@ -59,7 +59,7 @@ public class Validation {
 
         }
     }
-    int getInt(String msg , String err , int min , int max){
+    public int getInt(String msg , String err , int min , int max){
         while(true){
             try {
                 System.out.println(msg);

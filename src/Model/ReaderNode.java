@@ -11,7 +11,7 @@ package Model;
  */
 public class ReaderNode {
 
-  ReaderNode next;
+   public ReaderNode next;
   public Reader info;
 
     public ReaderNode() {

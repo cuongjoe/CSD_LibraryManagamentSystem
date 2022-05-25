@@ -7,32 +7,236 @@ package manager;
 
 import Validation.Validation;
 import Model.*;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
 public class ReaderManager {
+
+    Scanner sc = new Scanner(System.in);
+    
+    
+    
     Validation validate = new Validation();
     private ReaderNode head;
     private ReaderNode tail;
-    
 
     public ReaderManager() {
         head = tail = null;
     }
-    boolean isEmpty(){
-        return head == null ;
-    }
-    void clear(){
-        head =tail = null;
-    }
-    void visit(ReaderNode p){
-        System.out.println(p.info);
-    
-    
-}
-}
-    
 
+    boolean isEmpty() {
+        return head == null;
+    }
+
+    void clear() {
+        head = tail = null;
+    }
+//in ra thong tin cua node
+    void visit(ReaderNode p) {
+        System.out.println(p.info);
+
+    }
+//in ra toan bo node
+    void traverse() {
+        ReaderNode p = head;
+        while (p != null) {
+            visit(p);
+            p = p.next;
+
+        }
+        System.out.println();
+    }
+//them vao cuoi cuar linked list
+    void addLast(Reader reader) {
+        ReaderNode q = new ReaderNode(reader);
+        if (isEmpty()) {
+            head = tail = q;
+
+        } else {
+            tail.next = q;
+            tail = q;
+        }
+    }
+//tim kiem node theo code
+    ReaderNode SearchNodeByCode(String code) {
+        ReaderNode p = head;
+        while (p != null) {
+            if (String.valueOf(p.info.getrCode()).equalsIgnoreCase(code)) {
+                return p;
+
+            }
+            p = p.next;
+        }
+        return null;
+
+    }
+//tim kiem theo code
+    void searchByCode(String code) {
+        ReaderNode p = head;
+        System.out.println("rCode    Name    Year");
+        while (p != null) {
+            if (String.valueOf(p.info.getrCode()).equalsIgnoreCase(code)) {
+                visit(p);
+            }
+            p = p.next;
+        }
+    }
+//xoa node dau tien
+    void deleteFirst() {
+        if (isEmpty()) {
+            return;
+        }
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+
+    }
+//xoa node bat ki
+    void delete(ReaderNode q) {
+        if (q == null) {
+            return;
+        }
+        if (q == head) {
+            deleteFirst();
+            return;
+        }
+        ReaderNode find = head;
+        while (find != null && find.next != q) {
+            find = find.next;
+        }
+        if (find == null) {
+            return;
+        }
+        ReaderNode qNext = q.next;
+        find.next = qNext;
+        if (find.next == null) {
+            tail = find;
+        }
+    }
+//xoa node dua tren code
+    void deleteByCode(String code) {
+        ReaderNode root = head;
+        while (root != null) {
+            ReaderNode p = SearchNodeByCode(code);
+            delete(p);
+            root = root.next;
+        }
+    }
+//tim node lon nhat
+    ReaderNode findMaxcode() {
+        if (isEmpty()) {
+            return null;
+        }
+        ReaderNode q = null;
+        ReaderNode p = head;
+        int x;
+        x = p.info.getrCode();
+        p = p.next;
+        while (p != null) {
+            if (p.info.getrCode() > x) {
+                q = p;
+                x = p.info.getrCode();
+            }
+            p = p.next;
+
+        }
+        return (q);
+
+    }
+//in ra size
+    int size() {
+        int i = 0;
+        ReaderNode p = head;
+        while (p != null) {
+            i++;
+            p = p.next;
+        }
+        return (i);
+    }
+//doc file 
+    void loadFile(String fname) throws IOException {
+        BufferedReader br;
+        try ( FileReader fr = new FileReader(fname)) {
+            br = new BufferedReader(fr);
+            String s;
+            String a[];
+            Reader reader;
+            int rCode;
+            String name;
+            int year;
+            while (true) {
+                s = br.readLine();
+                if (s == null || s.trim().length() < 3) {
+                    break;
+                }
+                a = s.split("[|]");
+                rCode = Integer.valueOf(a[0].trim());
+                name = a[1].trim();
+                year = Integer.valueOf(a[2].trim());
+
+                reader = new Reader(rCode, name, year);
+                if (SearchNodeByCode(String.valueOf(reader.getrCode())) == null) {
+                    addLast(reader);
+                }
+
+            }
+
+        }
+        br.close();
+    }
+    
+    
+    String filename = "file/reader.txt";
+//in file
+    void savefile(String filename) {
+        try(FileWriter fw = new FileWriter(filename); PrintWriter pw = new PrintWriter(fw)){
+            ReaderNode p = head;
+            while(p!=null){
+                int code = p.info.getrCode();
+                String name = p.info.getName();
+                int year = p.info.getbYear();
+                pw.printf("%-8s | %-8s | &-8s \r\n", code,name,year);
+                p = p.next;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ReaderManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    Reader getReader(){
+        int rCode = 0;
+        if(isEmpty()){
+            rCode = 0;
+        }else{
+            rCode = findMaxcode().info.getrCode()+1;
+        }
+        String name = validate.getString("Name: ", "Please enter character!", "[a-zA-Z0-9]+");
+        int year = validate.getInt("Year: ", "Must be between 1900 to 2010", 1900, 2010);
+        Reader reader = new Reader(rCode, name, year);
+        return reader;
+    }
+    
+    void f1(){
+    clear();
+        System.out.println("rCode      Name     Year");
+        try {
+            loadFile(filename);
+            traverse();
+        } catch (IOException ex) {
+            Logger.getLogger(ReaderManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+}

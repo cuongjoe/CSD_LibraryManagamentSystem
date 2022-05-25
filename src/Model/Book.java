@@ -69,7 +69,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format ("%5s   | %-12s | %-8s | %-8.lf",bCode,title,quantity,price);
+        return String.format (" %5s | %-12s | %-8s | %-8.lf",bCode,title,quantity,price);
     }
     
     
