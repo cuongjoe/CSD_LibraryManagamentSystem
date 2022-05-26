@@ -198,7 +198,7 @@ public class ReaderManager {
     
     
 //    String filename = "C://Users//Admin//Documents//GitHub//CSD_LibraryManagamentSystem//src//file/reader.txt";
-    String filename = "C://Users//admin//Documents//JAVA-core project//CSD_LibraryManagamentSystem//src//file/reader.txt";
+    String filename = "reader.txt";
 //in file
     void savefile(String filename) {
         try(FileWriter fw = new FileWriter(filename); PrintWriter pw = new PrintWriter(fw)){
@@ -262,7 +262,7 @@ public class ReaderManager {
            return;
        }
        String filename = validate.getString("File name :", "File name format Error", "[a-zA-Z0-9]+");
-       savefile("file/" + filename + ".txt") ;
+       savefile(filename + ".txt") ;
        System.out.println("SAVED");
        
    }

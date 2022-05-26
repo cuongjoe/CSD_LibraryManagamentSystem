@@ -288,7 +288,7 @@ public class BookManager {
         return book;
     }
 
-    String file1 = "C://Users//admin//Documents//JAVA-core project//CSD_LibraryManagamentSystem//src//file/book.txt";
+    String file1 = "book.txt";
 
     void f1() throws IOException {
         clear();
@@ -321,7 +321,7 @@ public class BookManager {
             return;
         }
         String filename = validate.getString("Filename: ", "Wrong format", "[a-zA-Z0_9]+");
-        Savefile("file/" + filename + ".txt");
+        Savefile( filename + ".txt");
         System.out.println("Done");
     }
 
