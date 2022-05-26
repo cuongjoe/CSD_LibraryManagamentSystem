@@ -36,6 +36,7 @@ public class Validation {
                 if (num < 0) {
                     System.out.println(err);
                 }
+                return num;
             } catch (NumberFormatException e) {
                 System.out.println(err);
             }
@@ -51,7 +52,7 @@ public class Validation {
                 if (num < 0) {
                     System.out.println(err);
                 }
-
+                return num;
             } catch (NumberFormatException e) {
                 System.out.println(err);
 

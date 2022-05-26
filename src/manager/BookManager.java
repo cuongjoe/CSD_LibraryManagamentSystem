@@ -202,7 +202,7 @@ public class BookManager {
 
     void display() {
         Node p = head;
-        System.out.println("Code      Title        Quantity    Lended     Price      Value");
+        System.out.println("Code      Title        Quantity    Price      Value");
         while (p != null) {
             visitBefore(p);
             p = p.next;

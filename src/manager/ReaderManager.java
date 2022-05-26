@@ -207,7 +207,7 @@ public class ReaderManager {
                 int code = p.info.getrCode();
                 String name = p.info.getName();
                 int year = p.info.getbYear();
-                pw.printf("%-8s | %-8s | &-8s \r\n", code,name,year);
+                pw.printf("%-8s | %-8s | %-8s \r\n", code,name,year);
                 p = p.next;
             }
         } catch (IOException ex) {
